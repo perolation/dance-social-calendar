@@ -104,7 +104,7 @@ export const mockEvents: DanceEvent[] = [
     id: "10",
     title: "Hustle Night",
     danceType: "Hustle",
-    date: new Date(2024, 3, 30),
+    date: new Date(2024, 12, 4),
     startTime: "20:00",
     endTime: "23:00",
     location: "Disco Dance Club",
