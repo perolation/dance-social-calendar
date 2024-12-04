@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog } from "@/components/ui/dialog";
 import { DanceEvent } from "@/types/event";
 import EventDetails from "./EventDetails";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar as CalendarIcon, Circle } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { format } from "date-fns";
 
@@ -13,6 +13,7 @@ interface CalendarProps {
 const Calendar = ({ events }: CalendarProps) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedEvent, setSelectedEvent] = useState<DanceEvent | null>(null);
+  const [showDayView, setShowDayView] = useState(false);
   const isMobile = useIsMobile();
 
   const getDaysInMonth = (date: Date) => {
@@ -37,8 +38,16 @@ const Calendar = ({ events }: CalendarProps) => {
     
     return (
       <div className="space-y-4">
-        <div className="text-lg font-semibold text-center">
-          {format(selectedDate, "EEEE, MMMM d, yyyy")}
+        <div className="flex items-center justify-between">
+          <button 
+            onClick={() => setShowDayView(false)}
+            className="px-4 py-2 text-primary hover:text-secondary transition-colors"
+          >
+            Back to Calendar
+          </button>
+          <div className="text-lg font-semibold text-center">
+            {format(selectedDate, "EEEE, MMMM d, yyyy")}
+          </div>
         </div>
         {dayEvents.length === 0 ? (
           <div className="text-center text-gray-500 py-8">
@@ -73,7 +82,7 @@ const Calendar = ({ events }: CalendarProps) => {
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
       days.push(
-        <div key={`empty-${i}`} className="h-24 border border-gray-200 bg-gray-50"></div>
+        <div key={`empty-${i}`} className="h-24 md:h-24 h-16 border border-gray-200 bg-gray-50"></div>
       );
     }
 
@@ -85,27 +94,39 @@ const Calendar = ({ events }: CalendarProps) => {
         day
       );
       const dayEvents = getEventsForDate(currentDate);
+      const hasEvents = dayEvents.length > 0;
 
       days.push(
         <div
           key={day}
-          onClick={() => setSelectedDate(currentDate)}
-          className={`h-24 border border-gray-200 p-2 overflow-y-auto hover:bg-gray-50 transition-colors cursor-pointer
+          onClick={() => {
+            setSelectedDate(currentDate);
+            if (isMobile && hasEvents) {
+              setShowDayView(true);
+            }
+          }}
+          className={`h-24 md:h-24 h-16 border border-gray-200 p-2 overflow-y-auto hover:bg-gray-50 transition-colors cursor-pointer relative
             ${selectedDate.getDate() === day ? 'bg-primary/10' : ''}`}
         >
           <div className="font-semibold mb-1">{day}</div>
-          {dayEvents.map((event) => (
-            <div
-              key={event.id}
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedEvent(event);
-              }}
-              className="text-xs p-1 mb-1 rounded bg-primary text-white cursor-pointer hover:bg-secondary transition-colors animate-fade-in"
-            >
-              {event.title}
-            </div>
-          ))}
+          {isMobile ? (
+            hasEvents && (
+              <Circle className="h-2 w-2 absolute bottom-2 right-2 fill-primary text-primary" />
+            )
+          ) : (
+            dayEvents.map((event) => (
+              <div
+                key={event.id}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedEvent(event);
+                }}
+                className="text-xs p-1 mb-1 rounded bg-primary text-white cursor-pointer hover:bg-secondary transition-colors animate-fade-in"
+              >
+                {event.title}
+              </div>
+            ))
+          )}
         </div>
       );
     }
@@ -117,6 +138,10 @@ const Calendar = ({ events }: CalendarProps) => {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
+
+  if (isMobile && showDayView) {
+    return renderDayView();
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -143,23 +168,17 @@ const Calendar = ({ events }: CalendarProps) => {
         </div>
       </div>
 
-      {isMobile ? (
-        renderDayView()
-      ) : (
-        <>
-          <div className="grid grid-cols-7 gap-px mb-2">
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-              <div key={day} className="text-center font-semibold py-2 bg-gray-100">
-                {day}
-              </div>
-            ))}
+      <div className="grid grid-cols-7 gap-px mb-2">
+        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+          <div key={day} className="text-center font-semibold py-2 bg-gray-100">
+            {day}
           </div>
+        ))}
+      </div>
 
-          <div className="grid grid-cols-7 gap-px bg-white">
-            {renderCalendar()}
-          </div>
-        </>
-      )}
+      <div className="grid grid-cols-7 gap-px bg-white">
+        {renderCalendar()}
+      </div>
 
       <Dialog open={!!selectedEvent} onOpenChange={() => setSelectedEvent(null)}>
         {selectedEvent && <EventDetails event={selectedEvent} />}
