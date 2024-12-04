@@ -27,7 +27,7 @@ export const mockEvents: DanceEvent[] = [
     id: "3",
     title: "Swing Dance Party",
     danceType: "Swing",
-    date: new Date(2024, 3, 17),
+    date: new Date(2024, 3, 18),
     startTime: "19:30",
     endTime: "22:30",
     location: "The Vintage Ballroom",
