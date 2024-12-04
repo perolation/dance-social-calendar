@@ -3,6 +3,8 @@ import { Dialog } from "@/components/ui/dialog";
 import { DanceEvent } from "@/types/event";
 import EventDetails from "./EventDetails";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { format } from "date-fns";
 
 interface CalendarProps {
   events: DanceEvent[];
@@ -11,6 +13,7 @@ interface CalendarProps {
 const Calendar = ({ events }: CalendarProps) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedEvent, setSelectedEvent] = useState<DanceEvent | null>(null);
+  const isMobile = useIsMobile();
 
   const getDaysInMonth = (date: Date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -26,6 +29,39 @@ const Calendar = ({ events }: CalendarProps) => {
         event.date.getDate() === date.getDate() &&
         event.date.getMonth() === date.getMonth() &&
         event.date.getFullYear() === date.getFullYear()
+    );
+  };
+
+  const renderDayView = () => {
+    const dayEvents = getEventsForDate(selectedDate);
+    
+    return (
+      <div className="space-y-4">
+        <div className="text-lg font-semibold text-center">
+          {format(selectedDate, "EEEE, MMMM d, yyyy")}
+        </div>
+        {dayEvents.length === 0 ? (
+          <div className="text-center text-gray-500 py-8">
+            No events scheduled for this day
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {dayEvents.map((event) => (
+              <div
+                key={event.id}
+                onClick={() => setSelectedEvent(event)}
+                className="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer animate-fade-in"
+              >
+                <div className="font-semibold text-primary">{event.title}</div>
+                <div className="text-sm text-gray-600">
+                  {event.startTime} - {event.endTime}
+                </div>
+                <div className="text-sm text-gray-500">{event.location}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     );
   };
 
@@ -53,13 +89,18 @@ const Calendar = ({ events }: CalendarProps) => {
       days.push(
         <div
           key={day}
-          className="h-24 border border-gray-200 p-2 overflow-y-auto hover:bg-gray-50 transition-colors"
+          onClick={() => setSelectedDate(currentDate)}
+          className={`h-24 border border-gray-200 p-2 overflow-y-auto hover:bg-gray-50 transition-colors cursor-pointer
+            ${selectedDate.getDate() === day ? 'bg-primary/10' : ''}`}
         >
           <div className="font-semibold mb-1">{day}</div>
           {dayEvents.map((event) => (
             <div
               key={event.id}
-              onClick={() => setSelectedEvent(event)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedEvent(event);
+              }}
               className="text-xs p-1 mb-1 rounded bg-primary text-white cursor-pointer hover:bg-secondary transition-colors animate-fade-in"
             >
               {event.title}
@@ -102,17 +143,23 @@ const Calendar = ({ events }: CalendarProps) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-7 gap-px mb-2">
-        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-          <div key={day} className="text-center font-semibold py-2 bg-gray-100">
-            {day}
+      {isMobile ? (
+        renderDayView()
+      ) : (
+        <>
+          <div className="grid grid-cols-7 gap-px mb-2">
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+              <div key={day} className="text-center font-semibold py-2 bg-gray-100">
+                {day}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <div className="grid grid-cols-7 gap-px bg-white">
-        {renderCalendar()}
-      </div>
+          <div className="grid grid-cols-7 gap-px bg-white">
+            {renderCalendar()}
+          </div>
+        </>
+      )}
 
       <Dialog open={!!selectedEvent} onOpenChange={() => setSelectedEvent(null)}>
         {selectedEvent && <EventDetails event={selectedEvent} />}
