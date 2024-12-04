@@ -110,5 +110,16 @@ export const mockEvents: DanceEvent[] = [
     location: "Disco Dance Club",
     price: "$10",
     description: "Get your groove on with classic and modern Hustle dancing!",
+  },
+  {
+    id: "11",
+    title: "Bachata Nights",
+    danceType: "Hustle",
+    date: new Date(2024, 12, 10),
+    startTime: "20:00",
+    endTime: "23:00",
+    location: "6394 rue St-Hubert, Montreal",
+    price: "$15",
+    description: "Biased Awards - Urban bachata category",
   }
 ];
