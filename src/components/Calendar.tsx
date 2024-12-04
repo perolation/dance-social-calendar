@@ -82,7 +82,7 @@ const Calendar = ({ events }: CalendarProps) => {
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
       days.push(
-        <div key={`empty-${i}`} className="h-24 md:h-24 h-16 border border-gray-200 bg-gray-50"></div>
+        <div key={`empty-${i}`} className="h-24 md:h-32 border border-gray-200 bg-gray-50"></div>
       );
     }
 
@@ -105,7 +105,7 @@ const Calendar = ({ events }: CalendarProps) => {
               setShowDayView(true);
             }
           }}
-          className={`h-24 md:h-24 h-16 border border-gray-200 p-2 overflow-y-auto hover:bg-gray-50 transition-colors cursor-pointer relative
+          className={`h-24 md:h-32 border border-gray-200 p-2 overflow-y-auto hover:bg-gray-50 transition-colors cursor-pointer relative
             ${selectedDate.getDate() === day ? 'bg-primary/10' : ''}`}
         >
           <div className="font-semibold mb-1">{day}</div>
@@ -114,18 +114,21 @@ const Calendar = ({ events }: CalendarProps) => {
               <Circle className="h-2 w-2 absolute bottom-2 right-2 fill-primary text-primary" />
             )
           ) : (
-            dayEvents.map((event) => (
-              <div
-                key={event.id}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedEvent(event);
-                }}
-                className="text-xs p-1 mb-1 rounded bg-primary text-white cursor-pointer hover:bg-secondary transition-colors animate-fade-in"
-              >
-                {event.title}
-              </div>
-            ))
+            <div className="space-y-1">
+              {dayEvents.map((event) => (
+                <div
+                  key={event.id}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedEvent(event);
+                  }}
+                  className="text-xs p-1 rounded bg-primary text-white cursor-pointer hover:bg-secondary transition-colors animate-fade-in"
+                >
+                  <div className="font-medium">{event.title}</div>
+                  <div className="text-[10px] opacity-90">{event.startTime} | {event.danceType}</div>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       );
