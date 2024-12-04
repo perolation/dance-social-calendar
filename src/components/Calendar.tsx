@@ -35,11 +35,11 @@ const Calendar = ({ events }: CalendarProps) => {
 
   const renderDayView = () => {
     const dayEvents = getEventsForDate(selectedDate);
-    
+
     return (
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <button 
+          <button
             onClick={() => setShowDayView(false)}
             className="px-4 py-2 text-primary hover:text-secondary transition-colors"
           >
@@ -82,7 +82,10 @@ const Calendar = ({ events }: CalendarProps) => {
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
       days.push(
-        <div key={`empty-${i}`} className="h-24 md:h-32 border border-gray-200 bg-gray-50"></div>
+        <div
+          key={`empty-${i}`}
+          className="h-24 md:h-32 border border-gray-200 bg-gray-50"
+        ></div>
       );
     }
 
@@ -106,7 +109,7 @@ const Calendar = ({ events }: CalendarProps) => {
             }
           }}
           className={`h-24 md:h-32 border border-gray-200 p-2 overflow-y-auto hover:bg-gray-50 transition-colors cursor-pointer relative
-            ${selectedDate.getDate() === day ? 'bg-primary/10' : ''}`}
+            ${selectedDate.getDate() === day ? "bg-primary/10" : ""}`}
         >
           <div className="font-semibold mb-1">{day}</div>
           {isMobile ? (
@@ -125,7 +128,9 @@ const Calendar = ({ events }: CalendarProps) => {
                   className="text-xs p-1 rounded bg-primary text-white cursor-pointer hover:bg-secondary transition-colors animate-fade-in"
                 >
                   <div className="font-medium">{event.title}</div>
-                  <div className="text-[10px] opacity-90">{event.startTime} | {event.danceType}</div>
+                  <div className="text-[10px] opacity-90">
+                    {event.startTime} | {event.danceType}
+                  </div>
                 </div>
               ))}
             </div>
@@ -138,51 +143,73 @@ const Calendar = ({ events }: CalendarProps) => {
   };
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
-
-  if (isMobile && showDayView) {
-    return renderDayView();
-  }
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <CalendarIcon className="h-6 w-6 text-primary" />
-          <h2 className="text-2xl font-bold text-gray-800">
-            {monthNames[selectedDate.getMonth()]} {selectedDate.getFullYear()}
-          </h2>
-        </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setSelectedDate(new Date(selectedDate.setMonth(selectedDate.getMonth() - 1)))}
-            className="px-4 py-2 rounded bg-primary text-white hover:bg-secondary transition-colors"
-          >
-            Previous
-          </button>
-          <button
-            onClick={() => setSelectedDate(new Date(selectedDate.setMonth(selectedDate.getMonth() + 1)))}
-            className="px-4 py-2 rounded bg-primary text-white hover:bg-secondary transition-colors"
-          >
-            Next
-          </button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-7 gap-px mb-2">
-        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-          <div key={day} className="text-center font-semibold py-2 bg-gray-100">
-            {day}
+      {isMobile && showDayView ? (
+        renderDayView()
+      ) : (
+        <>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <CalendarIcon className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-bold text-gray-800">
+                {monthNames[selectedDate.getMonth()]} {selectedDate.getFullYear()}
+              </h2>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() =>
+                  setSelectedDate(
+                    new Date(selectedDate.setMonth(selectedDate.getMonth() - 1))
+                  )
+                }
+                className="px-4 py-2 rounded bg-primary text-white hover:bg-secondary transition-colors"
+              >
+                Previous
+              </button>
+              <button
+                onClick={() =>
+                  setSelectedDate(
+                    new Date(selectedDate.setMonth(selectedDate.getMonth() + 1))
+                  )
+                }
+                className="px-4 py-2 rounded bg-primary text-white hover:bg-secondary transition-colors"
+              >
+                Next
+              </button>
+            </div>
           </div>
-        ))}
-      </div>
+          <div className="grid grid-cols-7 gap-px mb-2">
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+              <div
+                key={day}
+                className="text-center font-semibold py-2 bg-gray-100"
+              >
+                {day}
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-7 gap-px bg-white">
+            {renderCalendar()}
+          </div>
+        </>
+      )}
 
-      <div className="grid grid-cols-7 gap-px bg-white">
-        {renderCalendar()}
-      </div>
-
+      {/* Dialog remains mounted independently */}
       <Dialog open={!!selectedEvent} onOpenChange={() => setSelectedEvent(null)}>
         {selectedEvent && <EventDetails event={selectedEvent} />}
       </Dialog>
