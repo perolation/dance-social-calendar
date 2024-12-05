@@ -4,7 +4,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Clock, MapPin, DollarSign } from "lucide-react";
+import { Clock, MapPin, DollarSign, Tag } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface EventDetailsProps {
   event: DanceEvent;
@@ -34,10 +35,21 @@ const EventDetails = ({ event }: EventDetailsProps) => {
           <span>{event.price}</span>
         </div>
         <div className="mt-4">
-          <h3 className="font-semibold mb-2">Dance Type</h3>
-          <span className="inline-block px-3 py-1 rounded-full bg-accent text-accent-foreground">
-            {event.danceType}
-          </span>
+          <div className="flex items-center gap-2 mb-2">
+            <Tag className="h-4 w-4" />
+            <h3 className="font-semibold">Dance Types</h3>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {event.danceType.map((type) => (
+              <Badge
+                key={type}
+                variant="secondary"
+                className="rounded-full bg-accent text-accent-foreground"
+              >
+                {type}
+              </Badge>
+            ))}
+          </div>
         </div>
         <div className="mt-4">
           <h3 className="font-semibold mb-2">Description</h3>

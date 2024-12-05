@@ -128,8 +128,17 @@ const Calendar = ({ events }: CalendarProps) => {
                   className="text-xs p-1 rounded bg-primary text-white cursor-pointer hover:bg-secondary transition-colors animate-fade-in"
                 >
                   <div className="font-medium">{event.title}</div>
-                  <div className="text-[10px] opacity-90">
-                    {event.startTime} | {event.danceType}
+                  <div className="text-[10px] opacity-90 flex items-center gap-1">
+                    <span>{event.startTime}</span>
+                    <span>|</span>
+                    <div className="flex flex-wrap gap-1">
+                      {event.danceType.map((type, index) => (
+                        <span key={index}>
+                          {type}
+                          {index < event.danceType.length - 1 ? "," : ""}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}
