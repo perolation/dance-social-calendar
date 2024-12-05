@@ -4,7 +4,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "1",
     title: "Baila Con Gusto - 🎃 Dance Like Stars",
-    danceType: "Bachata, Kizomba, Salsa",
+    danceType: ["Bachata", "Kizomba", "Salsa"],
     date: new Date(2024, 9, 31),
     startTime: "20:30",
     endTime: "02:00",
@@ -15,7 +15,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "2",
     title: "Mardi Kizomba Montreal",
-    danceType: "Kizomba",
+    danceType: ["Kizomba"],
     date: new Date(2024, 11, 3),
     startTime: "19:00",
     endTime: "01:00",
@@ -26,7 +26,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "3",
     title: "Les Mardis 88-SWING Chez Ernest",
-    danceType: "Swing",
+    danceType: ["Swing"],
     date: new Date(2024, 11, 3),
     startTime: "20:00",
     endTime: "02:00",
@@ -37,7 +37,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "4",
     title: "Bachata Nights",
-    danceType: "Bachata",
+    danceType: ["Bachata"],
     date: new Date(2024, 11, 3),
     startTime: "20:15",
     endTime: "23:59",
@@ -48,7 +48,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "5",
     title: "Grozepa - Cuban Live Band",
-    danceType: "Cuban Salsa, Salsa",
+    danceType: ["Cuban Salsa", "Salsa"],
     date: new Date(2024, 11, 4),
     startTime: "19:00",
     endTime: "23:30",
@@ -59,7 +59,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "6",
     title: "Mercredis Mariscos",
-    danceType: "Bachata, Konpa, Salsa",
+    danceType: ["Bachata", "Konpa", "Salsa"],
     date: new Date(2024, 11, 4),
     startTime: "19:30",
     endTime: "23:59",
@@ -70,7 +70,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "7",
     title: "Salsa on 2 with Edson Vallon",
-    danceType: "Salsa on 2",
+    danceType: ["Salsa on 2"],
     date: new Date(2024, 11, 4),
     startTime: "19:30",
     endTime: "22:00",
@@ -81,7 +81,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "8",
     title: "Vibraçao",
-    danceType: "Kizomba",
+    danceType: ["Kizomba"],
     date: new Date(2024, 11, 4),
     startTime: "19:45",
     endTime: "01:00",
@@ -92,7 +92,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "9",
     title: "Danoma Nights",
-    danceType: "Bachata, Kizomba, Konpa, Salsa, Zouk",
+    danceType: ["Bachata", "Kizomba", "Konpa", "Salsa", "Zouk"],
     date: new Date(2024, 11, 4),
     startTime: "20:00",
     endTime: "23:59",
@@ -103,7 +103,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "10",
     title: "Baila Con Gusto",
-    danceType: "Bachata, Kizomba, Salsa",
+    danceType: ["Bachata", "Kizomba", "Salsa"],
     date: new Date(2024, 11, 5),
     startTime: "20:30",
     endTime: "02:00",
@@ -114,7 +114,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "11",
     title: "Salseros Social",
-    danceType: "Bachata, Salsa",
+    danceType: ["Bachata", "Salsa"],
     date: new Date(2024, 11, 6),
     startTime: "19:30",
     endTime: "21:30",
@@ -125,7 +125,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "12",
     title: "Ritmo Vibes with Chano",
-    danceType: "Bachata, Salsa",
+    danceType: ["Bachata", "Salsa"],
     date: new Date(2024, 11, 6),
     startTime: "20:00",
     endTime: "02:30",
@@ -136,7 +136,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "13",
     title: "Saturday Night Dance Fever",
-    danceType: "Bachata, Salsa",
+    danceType: ["Bachata", "Salsa"],
     date: new Date(2024, 11, 7),
     startTime: "20:00",
     endTime: "02:00",
@@ -147,7 +147,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "14",
     title: "Kizomba Sundays",
-    danceType: "Kizomba",
+    danceType: ["Kizomba"],
     date: new Date(2024, 11, 8),
     startTime: "19:00",
     endTime: "23:00",
@@ -158,7 +158,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "15",
     title: "Salsa Fusion Night",
-    danceType: "Salsa",
+    danceType: ["Salsa"],
     date: new Date(2024, 11, 9),
     startTime: "20:00",
     endTime: "23:59",
@@ -169,7 +169,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "16",
     title: "Tuesday Tango Milonga",
-    danceType: "Tango",
+    danceType: ["Tango"],
     date: new Date(2024, 11, 10),
     startTime: "19:00",
     endTime: "23:00",
@@ -180,7 +180,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "17",
     title: "Bachata Bliss",
-    danceType: "Bachata",
+    danceType: ["Bachata"],
     date: new Date(2024, 11, 11),
     startTime: "20:00",
     endTime: "23:59",
@@ -191,7 +191,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "18",
     title: "Kiz & Chill",
-    danceType: "Kizomba",
+    danceType: ["Kizomba"],
     date: new Date(2024, 11, 12),
     startTime: "20:30",
     endTime: "01:00",
@@ -202,7 +202,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "19",
     title: "All Style Social",
-    danceType: "Bachata, Kizomba, Salsa, Swing",
+    danceType: ["Bachata", "Kizomba", "Salsa", "Swing"],
     date: new Date(2024, 11, 13),
     startTime: "19:00",
     endTime: "02:00",
@@ -213,7 +213,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "20",
     title: "Rueda de Casino",
-    danceType: "Cuban Salsa",
+    danceType: ["Cuban Salsa"],
     date: new Date(2024, 11, 14),
     startTime: "19:30",
     endTime: "22:30",
@@ -224,7 +224,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "21",
     title: "Swing in the City",
-    danceType: "Swing",
+    danceType: ["Swing"],
     date: new Date(2024, 11, 15),
     startTime: "20:00",
     endTime: "00:30",
@@ -235,7 +235,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "22",
     title: "Reggaeton Heat",
-    danceType: "Reggaeton",
+    danceType: ["Reggaeton"],
     date: new Date(2024, 11, 16),
     startTime: "21:00",
     endTime: "02:00",
@@ -246,7 +246,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "23",
     title: "Weekend Kizomba Party",
-    danceType: "Kizomba",
+    danceType: ["Kizomba"],
     date: new Date(2024, 11, 17),
     startTime: "21:00",
     endTime: "02:00",
@@ -257,7 +257,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "24",
     title: "Bachata & Zouk Night",
-    danceType: "Bachata, Zouk",
+    danceType: ["Bachata", "Zouk"],
     date: new Date(2024, 11, 18),
     startTime: "20:30",
     endTime: "01:30",
@@ -268,7 +268,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "25",
     title: "Afro-Latin Explosion",
-    danceType: "Salsa, Bachata, Kizomba, Afrobeat",
+    danceType: ["Salsa", "Bachata", "Kizomba", "Afrobeat"],
     date: new Date(2024, 11, 19),
     startTime: "21:00",
     endTime: "02:30",
@@ -279,7 +279,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "26",
     title: "Latin Groove Friday",
-    danceType: "Salsa, Bachata",
+    danceType: ["Salsa", "Bachata"],
     date: new Date(2024, 11, 20),
     startTime: "20:00",
     endTime: "02:00",
@@ -290,7 +290,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "27",
     title: "Electro Swing Night",
-    danceType: "Swing",
+    danceType: ["Swing"],
     date: new Date(2024, 11, 21),
     startTime: "21:00",
     endTime: "02:00",
@@ -301,7 +301,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "28",
     title: "Sunday Salsa Social",
-    danceType: "Salsa",
+    danceType: ["Salsa"],
     date: new Date(2024, 11, 22),
     startTime: "19:00",
     endTime: "23:00",
@@ -312,7 +312,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "29",
     title: "Kizomba Fundamentals Workshop",
-    danceType: "Kizomba",
+    danceType: ["Kizomba"],
     date: new Date(2024, 11, 23),
     startTime: "18:00",
     endTime: "20:00",
@@ -323,7 +323,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "30",
     title: "Salsa & Bachata Party",
-    danceType: "Salsa, Bachata",
+    danceType: ["Salsa", "Bachata"],
     date: new Date(2024, 11, 24),
     startTime: "20:30",
     endTime: "01:00",
@@ -334,7 +334,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "31",
     title: "Zouk Revival",
-    danceType: "Zouk",
+    danceType: ["Zouk"],
     date: new Date(2024, 11, 25),
     startTime: "21:00",
     endTime: "01:30",
@@ -345,7 +345,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "32",
     title: "Afro Dance Explosion",
-    danceType: "Afrobeat, Kizomba",
+    danceType: ["Afrobeat", "Kizomba"],
     date: new Date(2024, 11, 26),
     startTime: "21:00",
     endTime: "02:30",
@@ -356,7 +356,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "33",
     title: "Holiday Tango Gala",
-    danceType: "Tango",
+    danceType: ["Tango"],
     date: new Date(2024, 11, 27),
     startTime: "19:30",
     endTime: "23:59",
@@ -367,7 +367,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "34",
     title: "Bachata Under the Stars",
-    danceType: "Bachata",
+    danceType: ["Bachata"],
     date: new Date(2024, 11, 28),
     startTime: "20:00",
     endTime: "01:00",
@@ -378,7 +378,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "35",
     title: "Year-End Salsa Fiesta",
-    danceType: "Salsa",
+    danceType: ["Salsa"],
     date: new Date(2024, 11, 29),
     startTime: "21:00",
     endTime: "02:00",
@@ -389,7 +389,7 @@ export const mockEvents: DanceEvent[] = [
   {
     id: "36",
     title: "New Year's Eve Latin Party",
-    danceType: "Salsa, Bachata, Kizomba",
+    danceType: ["Salsa", "Bachata", "Kizomba"],
     date: new Date(2024, 11, 31),
     startTime: "21:00",
     endTime: "03:00",
