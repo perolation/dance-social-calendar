@@ -15,6 +15,8 @@ const Calendar = ({ events }: CalendarProps) => {
   const [selectedEvent, setSelectedEvent] = useState<DanceEvent | null>(null);
   const [showDayView, setShowDayView] = useState(false);
   const isMobile = useIsMobile();
+  const [displayedDate, setDisplayedDate] = useState(new Date());
+
 
   const getDaysInMonth = (date: Date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -75,10 +77,12 @@ const Calendar = ({ events }: CalendarProps) => {
   };
 
   const renderCalendar = () => {
-    const daysInMonth = getDaysInMonth(selectedDate);
-    const firstDay = getFirstDayOfMonth(selectedDate);
+    const displayedMonth = displayedDate.getMonth();
+    const displayedYear = displayedDate.getFullYear();
+    const daysInMonth = getDaysInMonth(displayedDate);
+    const firstDay = getFirstDayOfMonth(displayedDate);
     const days = [];
-
+  
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
       days.push(
@@ -88,17 +92,18 @@ const Calendar = ({ events }: CalendarProps) => {
         ></div>
       );
     }
-
+  
     // Add cells for each day of the month
     for (let day = 1; day <= daysInMonth; day++) {
-      const currentDate = new Date(
-        selectedDate.getFullYear(),
-        selectedDate.getMonth(),
-        day
-      );
+      const currentDate = new Date(displayedYear, displayedMonth, day);
       const dayEvents = getEventsForDate(currentDate);
       const hasEvents = dayEvents.length > 0;
-
+  
+      const isSelectedDate =
+        selectedDate.getDate() === day &&
+        selectedDate.getMonth() === displayedMonth &&
+        selectedDate.getFullYear() === displayedYear;
+  
       days.push(
         <div
           key={day}
@@ -109,7 +114,7 @@ const Calendar = ({ events }: CalendarProps) => {
             }
           }}
           className={`h-24 md:h-32 border border-gray-200 p-2 overflow-y-auto hover:bg-gray-50 transition-colors cursor-pointer relative
-            ${selectedDate.getDate() === day ? "bg-primary/10" : ""}`}
+            ${isSelectedDate ? "bg-primary/10" : ""}`}
         >
           <div className="font-semibold mb-1">{day}</div>
           {isMobile ? (
@@ -147,9 +152,10 @@ const Calendar = ({ events }: CalendarProps) => {
         </div>
       );
     }
-
+  
     return days;
   };
+  
 
   const monthNames = [
     "January",
@@ -176,31 +182,31 @@ const Calendar = ({ events }: CalendarProps) => {
             <div className="flex items-center gap-2">
               <CalendarIcon className="h-6 w-6 text-primary" />
               <h2 className="text-2xl font-bold text-gray-800">
-                {monthNames[selectedDate.getMonth()]} {selectedDate.getFullYear()}
+                {monthNames[displayedDate.getMonth()]} {displayedDate.getFullYear()}
               </h2>
             </div>
             <div className="flex gap-2">
-              <button
-                onClick={() =>
-                  setSelectedDate(
-                    new Date(selectedDate.setMonth(selectedDate.getMonth() - 1))
-                  )
-                }
-                className="px-4 py-2 rounded bg-primary text-white hover:bg-secondary transition-colors"
-              >
-                Previous
-              </button>
-              <button
-                onClick={() =>
-                  setSelectedDate(
-                    new Date(selectedDate.setMonth(selectedDate.getMonth() + 1))
-                  )
-                }
-                className="px-4 py-2 rounded bg-primary text-white hover:bg-secondary transition-colors"
-              >
-                Next
-              </button>
-            </div>
+            <button
+              onClick={() =>
+                setDisplayedDate(
+                  new Date(displayedDate.getFullYear(), displayedDate.getMonth() - 1, 1)
+                )
+              }
+              className="px-4 py-2 rounded bg-primary text-white hover:bg-secondary transition-colors"
+            >
+              Previous
+            </button>
+            <button
+              onClick={() =>
+                setDisplayedDate(
+                  new Date(displayedDate.getFullYear(), displayedDate.getMonth() + 1, 1)
+                )
+              }
+              className="px-4 py-2 rounded bg-primary text-white hover:bg-secondary transition-colors"
+            >
+              Next
+            </button>
+          </div>
           </div>
           <div className="grid grid-cols-7 gap-px mb-2">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
