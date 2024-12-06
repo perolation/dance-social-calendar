@@ -159,6 +159,8 @@ const Calendar = ({ events }: CalendarProps) => {
             selectedTag={selectedTag}
             onTagSelect={setSelectedTag}
             availableTags={availableTags}
+            events={events}
+            onEventSelect={setSelectedEvent}
           />
           <div className="grid grid-cols-7 gap-px mb-2">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
