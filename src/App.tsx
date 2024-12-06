@@ -28,7 +28,7 @@ const PlaceholderContactPage = ({ title }: { title: string }) => (
         {title}
       </h1>
       <p className="text-center text-gray-600">Diego-José Rodriguez Vasquez @and_his_name_was_dee_jay</p>
-      <href = "https://latin-dance-montreal.notion.site" </href>
+      <a href="https://latin-dance-montreal.notion.site" </a>
     </div>
   </div>
 );
