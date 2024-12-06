@@ -16,6 +16,7 @@ const Calendar = ({ events }: CalendarProps) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedEvent, setSelectedEvent] = useState<DanceEvent | null>(null);
   const [showDayView, setShowDayView] = useState(false);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const isMobile = useIsMobile();
   const [displayedDate, setDisplayedDate] = useState(new Date());
 
@@ -23,6 +24,15 @@ const Calendar = ({ events }: CalendarProps) => {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
+
+  // Get unique tags from all events
+  const availableTags = Array.from(
+    new Set(events.flatMap((event) => event.danceType))
+  ).sort();
+
+  const filteredEvents = selectedTag
+    ? events.filter((event) => event.danceType.includes(selectedTag))
+    : events;
 
   const getDaysInMonth = (date: Date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -33,7 +43,7 @@ const Calendar = ({ events }: CalendarProps) => {
   };
 
   const getEventsForDate = (date: Date) => {
-    return events.filter(
+    return filteredEvents.filter(
       (event) =>
         event.date.getDate() === date.getDate() &&
         event.date.getMonth() === date.getMonth() &&
@@ -146,6 +156,9 @@ const Calendar = ({ events }: CalendarProps) => {
                 )
               )
             }
+            selectedTag={selectedTag}
+            onTagSelect={setSelectedTag}
+            availableTags={availableTags}
           />
           <div className="grid grid-cols-7 gap-px mb-2">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
