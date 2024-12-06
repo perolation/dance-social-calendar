@@ -21,6 +21,17 @@ const PlaceholderPage = ({ title }: { title: string }) => (
   </div>
 );
 
+const PlaceholderContactPage = ({ title }: { title: string }) => (
+  <div className="min-h-screen bg-gray-50 py-8">
+    <div className="container mx-auto px-4">
+      <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
+        {title}
+      </h1>
+      <p className="text-center text-gray-600">Diego-José Rodriguez Vasquez @and_his_name_was_dee_jay.</p>
+    </div>
+  </div>
+);
+
 const AppLayout = ({ children }: { children: React.ReactNode }) => (
   <>
     <Navigation />
@@ -40,7 +51,7 @@ const App = () => (
             <Route path="/announcements" element={<PlaceholderPage title="Announcements" />} />
             <Route path="/dance-teams" element={<PlaceholderPage title="Dance Teams" />} />
             <Route path="/find-school" element={<FindSchool />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<PlaceholderContactPage title="Contact" />} />
             <Route path="/faq" element={<PlaceholderPage title="FAQ" />} />
           </Routes>
         </AppLayout>
