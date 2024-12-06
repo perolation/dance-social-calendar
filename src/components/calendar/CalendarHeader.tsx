@@ -78,8 +78,9 @@ const CalendarHeader = ({
             <CommandInput placeholder="Search events..." />
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
-              <CommandGroup heading="Events">
-                {events.map((event) => (
+              <CommandGroup heading="Upcoming Events">
+                {futureEvents.map((event) => ( //Integrating future events
+                //{events.map((event) => (
                   <CommandItem
                     key={event.id}
                     onSelect={() => {
