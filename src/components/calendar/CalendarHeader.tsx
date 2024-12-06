@@ -1,4 +1,4 @@
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Command,
@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/command";
 import { useState } from "react";
 import { DanceEvent } from "@/types/event";
-import { startOfDay, isAfter, isEqual } from "date-fns";
 
 interface CalendarHeaderProps {
   currentMonth: string;
@@ -37,12 +36,6 @@ const CalendarHeader = ({
   onEventSelect,
 }: CalendarHeaderProps) => {
   const [open, setOpen] = useState(false);
-  const today = startOfDay(new Date());
-
-  // Filter events to only show today and future events
-  const futureEvents = events.filter((event) => 
-    isAfter(startOfDay(event.date), today) || isEqual(startOfDay(event.date), today)
-  );
 
   return (
     <div className="space-y-4 mb-6">
@@ -72,59 +65,40 @@ const CalendarHeader = ({
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
         <div className="w-full md:w-96">
           <Command className="rounded-lg border shadow-md">
-            <CommandInput 
-              placeholder="Search events..." 
-              onFocus={() => setOpen(true)}
-            />
+            <CommandInput placeholder="Search events..." onFocus={() => setOpen(true)} />
           </Command>
 
-          <CommandDialog 
-            open={open} 
-            onOpenChange={setOpen}
-          >
-            <div className="fixed inset-0 z-[100] bg-white md:relative md:inset-auto md:bg-transparent">
-              <div className="relative h-[100dvh] md:h-auto">
-                <button
-                  onClick={() => setOpen(false)}
-                  className="absolute right-4 top-4 p-2 md:hidden"
-                >
-                  ✕
-                </button>
-                <CommandInput 
-                  placeholder="Search events..."
-                  className="h-14 md:h-auto"
-                />
-                <CommandList className="h-[calc(100dvh-60px)] md:h-[300px] overflow-y-auto">
-                  <CommandEmpty>No results found.</CommandEmpty>
-                  <CommandGroup heading="Upcoming Events">
-                    {futureEvents.map((event) => (
-                      <CommandItem
-                        key={event.id}
-                        onSelect={() => {
-                          onEventSelect(event);
-                          setOpen(false);
-                        }}
-                        className="cursor-pointer"
-                      >
-                        <div className="flex flex-col">
-                          <span className="font-medium">{event.title}</span>
-                          <span className="text-sm text-gray-500">
-                            {event.location} • {event.price}
-                          </span>
-                          <div className="flex gap-1 mt-1">
-                            {event.danceType.map((type) => (
-                              <Badge key={type} variant="secondary" className="text-xs">
-                                {type}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </CommandList>
-              </div>
-            </div>
+          <CommandDialog open={open} onOpenChange={setOpen}>
+            <CommandInput placeholder="Search events..." />
+            <CommandList>
+              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandGroup heading="Events">
+                {events.map((event) => (
+                  <CommandItem
+                    key={event.id}
+                    onSelect={() => {
+                      onEventSelect(event);
+                      setOpen(false);
+                    }}
+                    className="cursor-pointer"
+                  >
+                    <div className="flex flex-col">
+                      <span className="font-medium">{event.title}</span>
+                      <span className="text-sm text-gray-500">
+                        {event.location} • {event.price}
+                      </span>
+                      <div className="flex gap-1 mt-1">
+                        {event.danceType.map((type) => (
+                          <Badge key={type} variant="secondary" className="text-xs">
+                            {type}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
           </CommandDialog>
         </div>
 
