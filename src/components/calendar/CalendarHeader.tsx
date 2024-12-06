@@ -82,8 +82,8 @@ const CalendarHeader = ({
             open={open} 
             onOpenChange={setOpen}
           >
-            <div className="fixed inset-0 z-50 bg-white md:relative md:inset-auto md:bg-transparent">
-              <div className="relative h-full md:h-auto">
+            <div className="fixed inset-0 z-[100] bg-white md:relative md:inset-auto md:bg-transparent">
+              <div className="relative h-[100dvh] md:h-auto">
                 <button
                   onClick={() => setOpen(false)}
                   className="absolute right-4 top-4 p-2 md:hidden"
@@ -94,7 +94,7 @@ const CalendarHeader = ({
                   placeholder="Search events..."
                   className="h-14 md:h-auto"
                 />
-                <CommandList className="h-[calc(100vh-60px)] md:h-[300px] overflow-y-auto">
+                <CommandList className="h-[calc(100dvh-60px)] md:h-[300px] overflow-y-auto">
                   <CommandEmpty>No results found.</CommandEmpty>
                   <CommandGroup heading="Upcoming Events">
                     {futureEvents.map((event) => (
