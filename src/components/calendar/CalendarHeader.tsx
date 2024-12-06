@@ -81,9 +81,8 @@ const CalendarHeader = ({
           <CommandDialog 
             open={open} 
             onOpenChange={setOpen}
-            className="fixed inset-0 z-50 md:relative md:inset-auto"
           >
-            <div className="fixed inset-0 bg-white md:static md:bg-transparent">
+            <div className="fixed inset-0 z-50 bg-white md:relative md:inset-auto md:bg-transparent">
               <div className="relative h-full md:h-auto">
                 <button
                   onClick={() => setOpen(false)}
