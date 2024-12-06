@@ -36,10 +36,7 @@ const DayCell = ({
             <EventCard
               key={event.id}
               event={event}
-              onClick={(e) => {
-                e.stopPropagation();
-                onEventClick(event);
-              }}
+              onClick={() => onEventClick(event)}
             />
           ))}
         </div>

@@ -6,6 +6,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { format } from "date-fns";
 import CalendarHeader from "./calendar/CalendarHeader";
 import DayCell from "./calendar/DayCell";
+import EventCard from "./calendar/EventCard";
 
 interface CalendarProps {
   events: DanceEvent[];
