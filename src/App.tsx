@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Index from "./pages/Index";
 import FindSchool from "./pages/FindSchool";
+import FindSchool from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
