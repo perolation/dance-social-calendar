@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/command";
 import { useState } from "react";
 import { DanceEvent } from "@/types/event";
+import { startOfDay, isAfter, isEqual } from "date-fns";
 
 interface CalendarHeaderProps {
   currentMonth: string;
@@ -36,6 +37,11 @@ const CalendarHeader = ({
   onEventSelect,
 }: CalendarHeaderProps) => {
   const [open, setOpen] = useState(false);
+  const today = startOfDay(new Date());
+  // Filter events to only show today and future events
+  const futureEvents = events.filter((event) => 
+    isAfter(startOfDay(event.date), today) || isEqual(startOfDay(event.date), today)
+  );
 
   return (
     <div className="space-y-4 mb-6">
